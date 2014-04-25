@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">﻿
     <title>Left Side Menu App template</title>
 <!--
     This template can be used for simple app with left side menu that can be opened to switch views, for applications like Youtube App or Gmail app.
@@ -21,6 +22,7 @@
         function onDeviceReady(){ 
             $.ui.launch();
             intel.xdk.device.hideSplashScreen();
+           
         }
         document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
     </script>
@@ -29,10 +31,26 @@
     <script>   
         $.ui.autoLaunch = false;
         $.ui.animateHeaders = true;
-        $.ui.useOSThemes=false;           
+        $.ui.useOSThemes=false;    
+           
         $(document).ready(function(){
             $.ui.setSideMenuWidth('260px');
             $.ui.launch();
+             $.ajax({
+                type:"GET",
+                dataType: 'json',
+                url:"http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10",
+                beforeSend: function(){
+                     $.ui.showMask();
+                 },
+                success: function (data) {
+                    $.each(data, function(k, v) {
+                       $('#platos_list').append('<li><a href="#item1">Item 1</a></li>');
+                    });
+                    $.ui.hideMask();
+                },
+            });
+
         });
     </script>
 </head>
@@ -58,21 +76,8 @@
                 <h1>Order</h1>
             </header>   
 
-            <ul class="list">
-                <li class="divider">Platos Principales</li>
-                <li><a href="#item1">Item 1</a></li>
-                <li><a href="#item2">Item 2</a></li>
-                <li><a href="#item3">Item 3</a></li>
-                <li><a href="#item4">Item 4</a></li>
-                <li><a href="#item5">Item 5</a></li>
-                <li><a href="#item6">Item 6</a></li>
-                <li class="divider">Sandwhiches</li>
-                <li><a href="#item7">Item 7</a></li>
-                <li><a href="#item8">Item 8</a></li>
-                <li><a href="#item9">Item 9</a></li>
-                <li><a href="#item10">Item 10</a></li>
-                <li><a href="#item11">Item 11</a></li>
-                <li><a href="#item12">Item 12</a></li>
+            <ul class="list" id="platos_list">
+               
             </ul>
             <footer><a class="icon basket"></a></footer>
 
