@@ -2,17 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flat UI - Free Bootstrap Framework and Themes</title>
+    <title>Swaiter - Order Now</title>
     <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
 
     <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 
-    <!-- Loading Bootstrap -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Loading Flat UI -->
-    <link href="css/flat-ui.css" rel="stylesheet">
-    <link href="css/demo.css" rel="stylesheet">
+    <!-- Loading App-framework -->
+    <link href="css/af.ui.css" rel="stylesheet">
+    <link href="css/af.ui.base.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="images/favicon.ico">
 
@@ -23,33 +21,41 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container">
-          <div class="login-form">
-            <div class="form-group">
-              <input type="text" class="form-control login-field" value="" placeholder="Enter your name" id="login-name" />
-              <label class="login-field-icon fui-user" for="login-name"></label>
+   
+    <div class="" id="afui">
+        <div style="backface-visibility: hidden; transform-origin: 0% 0% 0px;" class="header hasMenu splitview" id="header">                
+        <header id="defaultHeader"><a style="visibility: hidden;" id="backButton" class="button">Main</a><h1 id="pageTitle">Main</h1></header><div class="afui_panel_mask"></div></div>
+        <div style="backface-visibility: hidden; transform-origin: 0% 0% 0px; height: 457px;" class="hasMenu splitview" id="content">
+            <div style="overflow: hidden; display: block;" data-title="Main" js-scrolling="true" class="panel y-scroll" id="page" title="" selected="true"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="afScrollPanel">
+                <ul class="list">
+                    <li>
+                        <a href="#">Item 1</a>
+                    </li>
+
+                    <li>
+                        <a href="#">Item 2</a>
+                    </li>
+                </ul>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim enim venenatis erat consequat eget iaculis leo sodales. Sed adipiscing tellus vitae magna dapibus venenatis. </p>
+                    <label style="padding-left:10px">Input Test</label><input type="text">
+                    <a class="button" href="javascript:$.ui.toggleSideMenu()">Toggle Side Menu</a>
+                
+            </div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div>
+        <div style="overflow: hidden;" data-title="" title="" js-scrolling="true" class="panel y-scroll" data-crc="afui_ajax" id="afui_ajax"><div class="afScrollPanel"></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div><div class="afui_panel_mask"></div></div>
+
+        <div style="backface-visibility: hidden; transform-origin: 0% 0% 0px;" id="navbar" class="footer hasMenu splitview">
+                
+        <footer id="defaultNav"><a data-resethistory="true" data-ignore-pressed="true" href="#page" class="icon home" style="width:100%">Home</a></footer><div class="afui_panel_mask"></div></div>
+
+        
+    <div class="hasMenu splitview tabletMenu" style="overflow: hidden;" id="menu"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" id="menu_scroller"><nav id="nav_0">
+            <div style="padding:10px">
+                This is a side menu
             </div>
+            
+        </nav></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px; transition-duration: 0ms;"></div></div><div class="splitview" style="overflow: hidden;" id="aside_menu"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" id="aside_menu_scroller"></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div><div style="display: none;" afmoldstyle="block" id="afui_modal"><div class="header" id="modalHeader"></div><div style="overflow: hidden;" id="modalContainer"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);"></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div><div class="footer" id="modalFooter"></div><div id="modalTransContainer"></div></div></div>
 
-            <div class="form-group">
-              <input type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass" />
-              <label class="login-field-icon fui-lock" for="login-pass"></label>
-            </div>
-
-            <a class="btn btn-primary btn-lg btn-block" href="#">Login</a>
-            <a class="login-link" href="#">Lost your password?</a>
-          </div>
-
-     
-              <div class="btn-toolbar">
-                <div class="btn-group">
-                  <a class="btn btn-primary" href="#fakelink"><span class="fui-time"></span></a>
-                  <a class="btn btn-primary" href="#fakelink"><span class="fui-photo"></span></a>
-                  <a class="btn btn-primary active" href="#fakelink"><span class="fui-heart"></span></a>
-                  <a class="btn btn-primary" href="#fakelink"><span class="fui-eye"></span></a>
-                </div>
-              </div> <!-- /toolbar -->
-               
-    </div> <!-- /container -->
+<div style="display: none;" class="ui-loader" id="afui_mask"><span class="ui-icon ui-icon-loading spin"></span><h1>Loading Content</h1></div>
     
     <!-- Load JS here for greater good =============================-->
     <script src="js/jquery-1.8.3.min.js"></script>
@@ -65,5 +71,10 @@
     <script src="js/jquery.stacktable.js"></script>
     <script src="http://vjs.zencdn.net/4.3/video.js"></script>
     <script src="js/application.js"></script>
+    <script src="js/appframework/appframework.ui.js"></script>
+    <script src="js/appframework/appframework.js"></script>
+    <script src="js/appframework/appframework.ui.js"></script>
+    <script src="js/appframework/af.slidemenu.js"></script>
+   
   </body>
 </html>
