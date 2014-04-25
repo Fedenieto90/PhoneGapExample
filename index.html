@@ -42,7 +42,7 @@
     <!--Left Side Menu Navigation bar -->
     <nav>
         <ul class="list">
-            <li><a href="#page1" class="icon home">Home</a></li>
+            <li><a href="#page1" class="icon home">Order</a></li>
             <li><a href="#page2" class="icon heart">Favorites</a></li>
             <li><a href="#page3" class="icon chat">Messages</a></li>
             <li><a href="#page4" class="icon user">Profile</a></li>
@@ -52,13 +52,14 @@
     <div id="content" style=""> 
         
     <!--Main View Pages-->
-        <div class="panel" title="Home" id="page1" data-footer="none" selected="true">
+        <div class="panel" title="Order" id="page1" data-footer="true" selected="true">
             <header>
                 <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
-                <h1>Home</h1>
-            </header>           
+                <h1>Order</h1>
+            </header>   
+
             <ul class="list">
-                <li><a href="#item1">Item 1</a></li>
+                 <li><a href="#item1">Item 1</a></li>
                 <li><a href="#item2">Item 2</a></li>
                 <li><a href="#item3">Item 3</a></li>
                 <li><a href="#item4">Item 4</a></li>
@@ -71,12 +72,14 @@
                 <li><a href="#item11">Item 11</a></li>
                 <li><a href="#item12">Item 12</a></li>
             </ul>
+            <footer><a class="icon basket">Items in order: 2</a></footer>
 
-             <!--Detail View Pages for each list items-->
-        <div class="panel" title="Item 1" id="item1" data-footer="none">
-            <p>Plato</p>
-            <p>Descripcion</p>
-            <p>Precio</p>
+        </div>
+
+         <!--Detail View Pages for each list items-->
+        <div class="panel" title="Item 1" id="item1" data-footer="true">
+            <p>This is detail view for Item 1</p>
+            <footer><a class="icon basket">Items in order: 2</a></footer>
         </div>
         
         <div class="panel" title="Item 2" id="item2" data-footer="none">
@@ -123,8 +126,6 @@
             <p>This is detail view for Item 12</p>
         </div>
         
-        </div>
-        
         <div class="panel" title="Favorites" id="page2" data-footer="none">
             <header>
                 <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
@@ -150,6 +151,7 @@
         </div>
         
     </div>
+
 </div>
 </body>
 </html>    
