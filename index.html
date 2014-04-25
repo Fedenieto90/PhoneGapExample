@@ -1,63 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Swaiter - Order Now</title>
-    <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
-
-    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
-
-
-    <!-- Loading App-framework -->
-    <link href="css/af.ui.css" rel="stylesheet">
-    <link href="css/af.ui.base.css" rel="stylesheet">
-
-    <link rel="shortcut icon" href="images/favicon.ico">
-  </head>
-  <body>
-   
-    <div class="" id="afui">
-        <div style="backface-visibility: hidden; transform-origin: 0% 0% 0px;" class="header hasMenu splitview" id="header">                
-        <header id="defaultHeader"><a style="visibility: hidden;" id="backButton" class="button">Main</a><h1 id="pageTitle">Main</h1></header><div class="afui_panel_mask"></div></div>
-        <div style="backface-visibility: hidden; transform-origin: 0% 0% 0px; height: 457px;" class="hasMenu splitview" id="content">
-            <div style="overflow: hidden; display: block;" data-title="Main" js-scrolling="true" class="panel y-scroll" id="page" title="" selected="true"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" class="afScrollPanel">
-                <ul class="list">
-                    <li>
-                        <a href="#">Item 1</a>
-                    </li>
-
-                    <li>
-                        <a href="#">Item 2</a>
-                    </li>
-                </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim enim venenatis erat consequat eget iaculis leo sodales. Sed adipiscing tellus vitae magna dapibus venenatis. </p>
-                    <label style="padding-left:10px">Input Test</label><input type="text">
-                    <a class="button" href="javascript:$.ui.toggleSideMenu()">Toggle Side Menu</a>
-                
-            </div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div>
-        <div style="overflow: hidden;" data-title="" title="" js-scrolling="true" class="panel y-scroll" data-crc="afui_ajax" id="afui_ajax"><div class="afScrollPanel"></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div><div class="afui_panel_mask"></div></div>
-
-        <div style="backface-visibility: hidden; transform-origin: 0% 0% 0px;" id="navbar" class="footer hasMenu splitview">
-                
-        <footer id="defaultNav"><a data-resethistory="true" data-ignore-pressed="true" href="#page" class="icon home" style="width:100%">Home</a></footer><div class="afui_panel_mask"></div></div>
-
-        
-    <div class="hasMenu splitview tabletMenu" style="overflow: hidden;" id="menu"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" id="menu_scroller"><nav id="nav_0">
-            <div style="padding:10px">
-                This is a side menu
-            </div>
-            
-        </nav></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px; transition-duration: 0ms;"></div></div><div class="splitview" style="overflow: hidden;" id="aside_menu"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);" id="aside_menu_scroller"></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div><div style="display: none;" afmoldstyle="block" id="afui_modal"><div class="header" id="modalHeader"></div><div style="overflow: hidden;" id="modalContainer"><div style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);"></div><div class="afScrollbar" style="position: absolute; width: 5px; height: 20px; border-radius: 2px; display: none; background: none repeat scroll 0% 0% black; top: 0px;"></div></div><div class="footer" id="modalFooter"></div><div id="modalTransContainer"></div></div></div>
-
-<div style="display: none;" class="ui-loader" id="afui_mask"><span class="ui-icon ui-icon-loading spin"></span><h1>Loading Content</h1></div>
+<html>
+<head>
+    <title>Left Side Menu App template</title>
+<!--
+    This template can be used for simple app with left side menu that can be opened to switch views, for applications like Youtube App or Gmail app.
+-->  
     
-    <!-- Load JS here for greater good =============================-->
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="js/jquery.ui.touch-punch.min.js"></script>
-    <script src="js/appframework/appframework.ui.js"></script>
-    <script src="js/appframework/appframework.js"></script>
-    <script src="js/appframework/af.slidemenu.js"></script>
-   
-  </body>
-</html>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0;" />
+    
+    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="appframework/icons.css" />
+    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
+    <!--AppFramework plugin for sliding side menu-->
+    <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.slidemenu.js"></script>
+
+<!-- Required if packaging to native app using Intel XDK -->    
+    <script src="intelxdk.js"></script>
+    <script src="xhr.js"></script>
+    <script>    
+        function onDeviceReady(){ 
+            $.ui.launch();
+            intel.xdk.device.hideSplashScreen();
+        }
+        document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+    </script>
+<!-- end Intel XDK code -->
+    
+    <script>   
+        $.ui.autoLaunch = false;
+        $.ui.animateHeaders = false;
+                
+        $(document).ready(function(){
+            $.ui.setSideMenuWidth('260px');
+            $.ui.launch();
+        });
+    </script>
+</head>
+<body> 
+<div id="afui">
+    
+    <!--Left Side Menu Navigation bar -->
+    <nav>
+        <ul class="list">
+            <li><a href="#page1" class="icon home">Home</a></li>
+            <li><a href="#page2" class="icon heart">Favorites</a></li>
+            <li><a href="#page3" class="icon chat">Messages</a></li>
+            <li><a href="#page4" class="icon user">Profile</a></li>
+        </ul>
+    </nav>
+    
+    <div id="content" style=""> 
+        
+    <!--Main View Pages-->
+        <div class="panel" title="Home" id="page1" data-footer="none" selected="true">
+            <header>
+                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
+                <h1>Home</h1>
+            </header>
+            <p>This is view for first menu item</p>
+        </div>
+        
+        <div class="panel" title="Favorites" id="page2" data-footer="none">
+            <header>
+                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
+                <h1>Favorites</h1>
+            </header>
+            <p>This is view for second menu item</p>
+        </div>
+        
+        <div class="panel" title="Messages" id="page3" data-footer="none">
+            <header>
+                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
+                <h1>Messages</h1>
+            </header>
+            <p>This is view for third menu item</p>
+        </div>
+        
+        <div class="panel" title="Profile" id="page4" data-footer="none">
+            <header>
+                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
+                <h1>Profile</h1>
+            </header>
+            <p>This is view for fourth menu item</p>
+        </div>
+        
+    </div>
+</div>
+</body>
+</html>    
