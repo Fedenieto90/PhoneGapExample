@@ -1,164 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ionicApp">
 <head>
-    <meta charset="utf-8">﻿
-    <title>Left Side Menu App template</title>
-<!--
-    This template can be used for simple app with left side menu that can be opened to switch views, for applications like Youtube App or Gmail app.
--->  
-    
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0;" />
-    
-    <link rel="stylesheet" type="text/css" href="appframework/af.ui.css" />
-    <link rel="stylesheet" type="text/css" href="appframework/icons.css" />
-    <script type="text/javascript" charset="utf-8" src="appframework/appframework.ui.min.js"></script>
-    <!--AppFramework plugin for sliding side menu-->
-    <script type="text/javascript" charset="utf-8" src="appframework/plugins/af.slidemenu.js"></script>
 
-<!-- Required if packaging to native app using Intel XDK -->    
-    <script src="intelxdk.js"></script>
-    <script src="xhr.js"></script>
-    <script>    
-        function onDeviceReady(){ 
-            $.ui.launch();
-            intel.xdk.device.hideSplashScreen();
-           
-        }
-        document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
-    </script>
-<!-- end Intel XDK code -->
-    
-    <script>   
-        $.ui.autoLaunch = false;
-        $.ui.animateHeaders = true;
-        $.ui.useOSThemes=false;    
-           
-        $(document).ready(function(){
-            $.ui.setSideMenuWidth('260px');
-            $.ui.launch();
-             $.ajax({
-                type:"GET",
-                dataType: 'json',
-                url:"http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10",
-                beforeSend: function(){
-                     $.ui.showMask();
-                 },
-                success: function (data) {
-                    $.each(data, function(k, v) {
-                       $('#platos_list').append('<li><a href="#item1">Item 1</a></li>');
-                    });
-                    $.ui.hideMask();
-                },
-            });
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-        });
-    </script>
+  <title>Ionic List</title>
+
+  <link href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  <script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.min.js"></script>
+  <script src="script.js"></script>
+
 </head>
-<body> 
-<div id="afui">
-    
-    <!--Left Side Menu Navigation bar -->
-    <nav>
-        <ul class="list">
-            <li><a href="#page1" class="icon home">Order</a></li>
-            <li><a href="#page2" class="icon heart">Favorites</a></li>
-            <li><a href="#page3" class="icon chat">Messages</a></li>
-            <li><a href="#page4" class="icon user">Profile</a></li>
-        </ul>
-    </nav>
-    
-    <div id="content" style=""> 
-        
-    <!--Main View Pages-->
-        <div class="panel" title="Order" id="page1" data-footer="true" selected="true">
-            <header>
-                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
-                <h1>Order</h1>
-            </header>   
 
-            <ul class="list" id="platos_list">
-               
-            </ul>
-            <footer><a class="icon basket"></a></footer>
+<body ng-controller="MyCtrl">
 
-        </div>
-
-         <!--Detail View Pages for each list items-->
-        <div class="panel" title="Item 1" id="item1" data-footer="none">
-            <p>This is detail view for Item 1</p>
-           
-        </div>
-        
-        <div class="panel" title="Item 2" id="item2" data-footer="none">
-            <p>This is detail view for Item 2</p>
-        </div>
-        
-        <div class="panel" title="Item 3" id="item3" data-footer="none">
-            <p>This is detail view for Item 3</p>
-        </div>
-        
-        <div class="panel" title="Item 4" id="item4" data-footer="none">
-            <p>This is detail view for Item 4</p>
-        </div>
-        
-        <div class="panel" title="Item 5" id="item5" data-footer="none">
-            <p>This is detail view for Item 5</p>
-        </div>
-        
-        <div class="panel" title="Item 6" id="item6" data-footer="none">
-            <p>This is detail view for Item 6</p>
-        </div>
-        
-        <div class="panel" title="Item 7" id="item7" data-footer="none">
-            <p>This is detail view for Item 7</p>
-        </div>
-        
-        <div class="panel" title="Item 8" id="item8" data-footer="none">
-            <p>This is detail view for Item 8</p>
-        </div>
-        
-        <div class="panel" title="Item 9" id="item9" data-footer="none">
-            <p>This is detail view for Item 9</p>
-        </div>
-        
-        <div class="panel" title="Item 10" id="item10" data-footer="none">
-            <p>This is detail view for Item 10</p>
-        </div>
-        
-        <div class="panel" title="Item 11" id="item11" data-footer="none">
-            <p>This is detail view for Item 11</p>
-        </div>
-        
-        <div class="panel" title="Item 12" id="item12" data-footer="none">
-            <p>This is detail view for Item 12</p>
-        </div>
-        
-        <div class="panel" title="Favorites" id="page2" data-footer="none">
-            <header>
-                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
-                <h1>Favorites</h1>
-            </header>
-            <p>This is view for second menu item</p>
-        </div>
-        
-        <div class="panel" title="Messages" id="page3" data-footer="none">
-            <header>
-                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
-                <h1>Messages</h1>
-            </header>
-            <p>This is view for third menu item</p>
-        </div>
-        
-        <div class="panel" title="Profile" id="page4" data-footer="none">
-            <header>
-                <a id="menubadge" onclick='$.ui.toggleSideMenu()' class='menuButton' style="float:left !important"></a>
-                <h1>Profile</h1>
-            </header>
-            <p>This is view for fourth menu item</p>
-        </div>
-        
+  <ion-header-bar class="bar-positive">
+    <div class="buttons">
+      <button class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
     </div>
+    <h1 class="title">Ionic Delete/Option Buttons</h1>
+  </ion-header-bar>
 
-</div>
+  <ion-content>
+
+    <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
+
+      <ion-item ng-repeat="item in items" item="item" href="#/item/{{item.id}}">
+        Item {{ item.id }}
+      </ion-item>
+
+    </ion-list>
+
+  </ion-content>
+
 </body>
-</html>    
+</html>
