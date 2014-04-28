@@ -1,4 +1,4 @@
-angular.module('ionicApp', ['ionic'])
+angular.module('ionicApp', ['ionic'] )
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -106,6 +106,17 @@ angular.module('ionicApp', ['ionic'])
   };
 })
 
-.controller('MenuCtrl', function($scope) {
+.controller('MenuCtrl', function($scope, $http) {
+  // Instantiate an object to store your scope data in (Best Practices)
+  $scope.data = {};
   console.log('MenuCtrl');
+
+  $http.get('http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10')
+  .success(function(data, status) {
+    $scope.data = data;
+  })
+  .error(function(data, status) {
+    console.log('Error');
+  });
+
 });

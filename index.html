@@ -89,9 +89,13 @@
       <ion-content>
         <div class="card">
           <div class="item item-text-wrap" style="text-align: center;">
-           Restaurant
+           {{data.nombre}}
           </div>
         </div>
+        <ion-item ng-repeat="item in data.platos" item="item" href="#/item/{{item.id}}">
+         ID {{item.id}}
+         Plato {{ item.nombre }}
+        </ion-item>
        
       </ion-content>
     </ion-view>
