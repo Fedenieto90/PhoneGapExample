@@ -75,18 +75,24 @@ angular.module('ionicApp', ['ionic'] )
       url: "/menu",
       templateUrl: "menu.html",
       controller: 'MenuCtrl'
+    })
+     .state('details', {
+      url: "/details",
+      templateUrl: "details.html",
+      controller: 'MenuCtrl'
     });
 
-   $urlRouterProvider.otherwise("/sign-in");
+  $urlRouterProvider.otherwise("/sign-in");   
 
 })
 
 .controller('SignInCtrl', function($scope, $state) {
-
+  $scope.user = {};
   $scope.signIn = function(user) {
     
     if (user.username && user.password){
       console.log('Sign-In', user);
+      $scope.user = user;
       $state.go('actions');
     }
   };
@@ -106,17 +112,46 @@ angular.module('ionicApp', ['ionic'] )
   };
 })
 
-.controller('MenuCtrl', function($scope, $http) {
+.controller('MenuCtrl', function($scope, $state, $http) {
+  
   // Instantiate an object to store your scope data in (Best Practices)
   $scope.data = {};
+
   console.log('MenuCtrl');
 
   $http.get('http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10')
   .success(function(data, status) {
+    console.log('Success');
     $scope.data = data;
+    $scope.items = data.platos;
   })
   .error(function(data, status) {
     console.log('Error');
   });
+
+  $scope.itemButtons = [
+    {
+      text: 'Rate',
+      type: 'button-assertive',
+      onTap: function (item) {
+        alert('Rate Item: ' + item.nombre);
+      }
+    },
+    {
+      text: 'Share',
+      type: 'button-calm',
+      onTap: function (item) {
+        alert('Share Item: ' + item.id);
+      }
+    }
+  ];
+
+   $scope.details = function(id) {
+      console.log('Item-clicked', id);
+      $state.go('details');
+  };
+
+
+
 
 });
