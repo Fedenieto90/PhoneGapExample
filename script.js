@@ -3,16 +3,6 @@ angular.module('ionicApp', ['ionic'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-  .state('menu', {
-      url: "/menu",
-      templateUrl: "menu.html",
-      controller: 'SignInCtrl'
-    })
-  .state('actions', {
-      url: "/main-actions",
-      templateUrl: "main-actions.html",
-      controller: 'SignInCtrl'
-    })
     .state('signin', {
       url: "/sign-in",
       templateUrl: "sign-in.html",
@@ -75,10 +65,17 @@ angular.module('ionicApp', ['ionic'])
           templateUrl: "contact.html"
         }
       }
+    })
+    .state('actions', {
+      url: "/action",
+      templateUrl: "main-actions.html",
+      controller: 'ScannerCtrl'
+    })
+     .state('menu', {
+      url: "/menu",
+      templateUrl: "menu.html",
+      controller: 'MenuCtrl'
     });
-    
-
-
 
    $urlRouterProvider.otherwise("/sign-in");
 
@@ -87,79 +84,28 @@ angular.module('ionicApp', ['ionic'])
 .controller('SignInCtrl', function($scope, $state) {
 
   $scope.signIn = function(user) {
-    console.log('Sign-In', user);
-    $state.go('actions');
-  };
-
-   $scope.scan = function() {
-    console.log('Scanned Url');
-    $state.go('menu');
-  };
-
-  $scope.data = {
-    showDelete: false
-  };
-
-  $scope.itemButtons = [
-    {
-      text: 'Edit',
-      type: 'button-assertive',
-      onTap: function (item) {
-        alert('Edit Item: ' + item.id);
-      }
-    },
-    {
-      text: 'Share',
-      type: 'button-calm',
-      onTap: function (item) {
-        alert('Share Item: ' + item.id);
-      }
+    
+    if (user.username && user.password){
+      console.log('Sign-In', user);
+      $state.go('actions');
     }
-  ];
-
-  $scope.onItemDelete = function (item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-  };
-
-  $scope.items = [
-    {
-      id: 1
-    },
-    {
-      id: 2
-    },
-    {
-      id: 3
-    },
-    {
-      id: 4
-    },
-    {
-      id: 5
-    },
-    {
-      id: 6
-    },
-    {
-      id: 7
-    },
-    {
-      id: 8
-    },
-    {
-      id: 9
-    },
-    {
-      id: 10
-    }
-  ];
-
-   $scope.detailedView = function(id) {
-    console.log('Clicked id: ', id);
   };
 
 })
 
 .controller('HomeTabCtrl', function($scope) {
   console.log('HomeTabCtrl');
+})
+
+.controller('ScannerCtrl', function($scope, $state) {
+  console.log('ScannerCtrl');
+  
+  $scope.scan = function() {
+      console.log('Url-scanned');
+      $state.go('menu');
+  };
+})
+
+.controller('MenuCtrl', function($scope) {
+  console.log('MenuCtrl');
 });
