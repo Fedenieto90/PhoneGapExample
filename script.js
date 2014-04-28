@@ -154,6 +154,10 @@ angular.module('ionicApp', ['ionic'])
     }
   ];
 
+   $scope.detailedView = function(id) {
+    console.log('Clicked id: ', id);
+  };
+
 })
 
 .controller('HomeTabCtrl', function($scope) {

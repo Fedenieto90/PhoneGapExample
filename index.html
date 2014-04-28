@@ -91,7 +91,7 @@
 
       <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
 
-        <ion-item ng-repeat="item in items" item="item" href="#/item/{{item.id}}">
+        <ion-item ng-repeat="item in items" item="item" ng-click="detailedView(item.id)">
           Item {{ item.id }}
         </ion-item>
 
