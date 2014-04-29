@@ -146,10 +146,12 @@ angular.module('ionicApp', ['ionic'] )
     }
   ];
 
-   $scope.details = function(id) {
+  $scope.details = function(id) {
       console.log('Item-clicked', id);
       $state.go('details');
   };
+
+  
 
 
 

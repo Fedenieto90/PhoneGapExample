@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
-  <title>Sign-in, Then Tabs Example</title>
+  <title>Swaiter - Order Now</title>
   
   <link href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.min.css" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
@@ -85,18 +85,18 @@
   </script>
 
    <script id="menu.html" type="text/ng-template">
-     <ion-view title="Menu">
+    <ion-view title="Menu">
     <ion-content>
       <div class="card">
             <div class="item item-text-wrap" style="text-align: center;">
-             {{data.nombre}}
+             <p>{{data.nombre}}</p> 
             </div>
       </div>
-      <ion-list option-buttons="itemButtons">
+      <ion-list>
         <ion-item ng-repeat="item in data.platos | orderBy:item.tipo" item="item" ng-click="details({{item.id}})">
-          <strong>{{ item.nombre }}</strong> <br>
-          {{ item.descripcion }} <br>
-          <strong>$ {{item.precio}}</strong>
+          <p><strong>{{ item.nombre }}</strong></p>
+          <p>{{ item.descripcion }}</p>
+          <p><strong>$ {{item.precio}}</strong></p>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -114,7 +114,7 @@
         </div>
 
         <div class="item item-body">
-          <img class="full-image" src="img/default_img.png">
+          <img class="full-image" src="img/default_img.jpg">
           <p>
             This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
             the content is from a card-body consisting of an image and paragraph text. The footer
@@ -139,8 +139,8 @@
             <i class="icon ion-share"></i>
             Share
           </a>
-          </div>
         </div>
+      </div>
     </ion-content>
   </script>
 
