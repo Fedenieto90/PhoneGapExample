@@ -118,6 +118,8 @@ angular.module('ionicApp', ['ionic'] )
 
 .controller('MenuCtrl', function($scope, $stateParams, $state, $http, SessionService, MenuService) {
   
+  // Set loading bar
+  $scope.loading = true;
   // Instantiate an object to store your scope data in (Best Practices)
   $scope.restaurante = null;
   // Img thumbnail
@@ -135,10 +137,12 @@ angular.module('ionicApp', ['ionic'] )
       $scope.clicked = MenuService.getplato(parseInt($stateParams.id));
       console.log($scope.clicked);
     }
+    $scope.loading = false;
   })
   .error(function(data, status) {
     console.log('Error');
     $scope.error="Error getting data from server";
+    $scope.loading = false;
   });
 
   

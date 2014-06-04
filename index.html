@@ -86,6 +86,7 @@
 
    <script id="menu.html" type="text/ng-template">
     <ion-view title="Menu">
+    <div class="bar bar-loading bar-assertive" data-ng-show="loading">Loading Menu...</div>
     <ion-content>
       <div data-ng-show="restaurante != null" class="card">
             <div class="item item-text-wrap" style="text-align: center;">
@@ -110,11 +111,11 @@
   </script>
 
    <script id="details.html" type="text/ng-template">
-    <ion-view title="Details">
+    <ion-view title="{{clicked.nombre}}">
     <ion-content>
       <div class="list card">
         <div class="item item-avatar">
-          <img src="img/default_avatar.png">
+           <img src="img/thumbnail.png"></img>
             <ion-list>
               <h2>{{clicked.nombre}}</h2>
               <h4>{{clicked.precio | currency}}</h4>
@@ -122,7 +123,7 @@
         </div>
 
         <div class="item item-body">
-          <img class="full-image" src="img/default_img.jpg">
+          <img class="full-image" src="img/thumbnail.png">
           <p>
             <h2>{{clicked.descripcion}}</h2>
           </p>
