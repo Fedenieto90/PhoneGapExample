@@ -111,7 +111,27 @@ angular.module('ionicApp', ['ionic'] )
   };
 })
 
-.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, $ionicModal, SessionService, MenuService) {
+.controller('ModalCtrl', function ($scope, SessionService, PedidoService, MenuService) {
+
+  console.log("ModalCtrl");
+  $scope.newUser = {};
+  $scope.user = SessionService.getuser();
+  $scope.pedido = PedidoService.getplatos();
+  $scope.img = 'img/thumbnail.png';
+
+  $scope.createContact = function () {
+    console.log('Create Contact', $scope.newUser);
+    $scope.modal.hide();
+  };
+
+  $scope.addPlato = function (item) {
+   PedidoService.addplato(item);
+  };
+
+})
+
+
+.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, $ionicModal, SessionService, MenuService, PedidoService) {
   
   // Set loading bar
   $scope.loading = true;
@@ -119,6 +139,8 @@ angular.module('ionicApp', ['ionic'] )
   $scope.restaurante = null;
   // Img thumbnail
   $scope.img = 'img/thumbnail.png';
+  
+  
   console.log('MenuCtrl');
   
   $http.get('http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10')
@@ -159,16 +181,6 @@ angular.module('ionicApp', ['ionic'] )
 })
 
 
-  .controller('ModalCtrl', function ($scope) {
-
-  $scope.newUser = {};
-
-  $scope.createContact = function () {
-    console.log('Create Contact', $scope.newUser);
-    $scope.modal.hide();
-  };
-
-})
 
 //SessionService
 .service('SessionService', function() {
@@ -180,8 +192,24 @@ angular.module('ionicApp', ['ionic'] )
     };
 })
 
+//PedidoService
+.service('PedidoService', function(MenuService) {
+    this.pedido = [];
+    this.addplato = function(item) {
+        this.pedido.push(item);
+    };
+    this.getplatos = function() {
+        return this.pedido;
+    };
+    this.countplatos = function(){
+        return this.pedido.length;
+        console.log(this.pedido.length);
+    };
+})
+
 //MenuService
 .service('MenuService', function() {
+    this.platos = [];
     this.setplatos = function(platos){
       this.platos = platos;
     }
