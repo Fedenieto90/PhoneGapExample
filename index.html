@@ -72,7 +72,7 @@
       <ion-content>
         <div class="card">
           <div class="item item-text-wrap" style="text-align: center;">
-           Bienvenido {{user.username}}
+           <h2>Bienvenido {{user.username}}</h2>
           </div>
         </div>
         <div class="padding">
@@ -85,7 +85,8 @@
   </script>
 
    <script id="menu.html" type="text/ng-template">
-    <ion-view title="Menu">
+    <ion-view title="{{restaurante.nombre}}">
+    
     <div class="bar bar-loading bar-assertive" data-ng-show="loading">Loading Menu...</div>
     <ion-content>
       <div data-ng-show="restaurante != null" class="card">
@@ -108,6 +109,12 @@
         </ion-item>
       </ion-list>
     </ion-content>
+    <ion-footer-bar align-title="left" class="bar-assertive">
+      <h1 class="title">Items en el pedido: </h1>
+      <div class="buttons" ng-click="doSomething()">
+        <button class="button">Mi pedido</button>
+      </div>
+    </ion-footer-bar>
   </script>
 
    <script id="details.html" type="text/ng-template">

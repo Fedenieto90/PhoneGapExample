@@ -98,25 +98,20 @@ angular.module('ionicApp', ['ionic'] )
       $state.go('actions');
     }
   };
-
-
-
-})
-
-.controller('HomeTabCtrl', function($scope) {
-  console.log('HomeTabCtrl');
 })
 
 .controller('ScannerCtrl', function($scope, $state, SessionService) {
+  
   console.log('ScannerCtrl');
   $scope.user = SessionService.getuser();
+  
   $scope.scan = function() {
       console.log('Url-scanned');
       $state.go('menu');
   };
 })
 
-.controller('MenuCtrl', function($scope, $stateParams, $state, $http, SessionService, MenuService) {
+.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, SessionService, MenuService) {
   
   // Set loading bar
   $scope.loading = true;
@@ -126,47 +121,35 @@ angular.module('ionicApp', ['ionic'] )
   $scope.img = 'img/thumbnail.png';
   console.log('MenuCtrl');
   
-
   $http.get('http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10')
   .success(function(data, status) {
-    console.log('Success getting data');
     $scope.restaurante = data;
     MenuService.setplatos($scope.restaurante.platos);
     if ($stateParams.id){
-      console.log($stateParams.id);
       $scope.clicked = MenuService.getplato(parseInt($stateParams.id));
-      console.log($scope.clicked);
     }
     $scope.loading = false;
   })
   .error(function(data, status) {
-    console.log('Error');
     $scope.error="Error getting data from server";
     $scope.loading = false;
+    $scope.showAlert();
   });
 
   
 
-  $scope.itemButtons = [
-    {
-      text: 'Rate',
-      type: 'button-assertive',
-      onTap: function (item) {
-        alert('Rate Item: ' + item.nombre);
-      }
-    },
-    {
-      text: 'Share',
-      type: 'button-calm',
-      onTap: function (item) {
-        alert('Share Item: ' + item.id);
-      }
-    }
-  ];
-
+  // Alert dialog
+  $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Error getting data from server!',
+       template: 'It might taste good'
+     });
+     alertPopup.then(function(res) {
+       $state.go('actions');
+     });
+  };
 
 })
-
 
 //SessionService
 .service('SessionService', function() {

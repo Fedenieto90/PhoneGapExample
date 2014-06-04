@@ -4,13 +4,13 @@ body {
 
 .bar.bar-loading {
   display: block;
-  height: 24px;
+  height: 50px;
   /* starts right below a normal header */
   top: 44px;
   /* make the text centered vertically and horizontally */
   text-align: center;
   padding: 0;
-  line-height: 24px;
+  line-height: 50px;
   /* transition 'sliding down' (check below)*/
   -webkit-transition: 200ms all;
 }
