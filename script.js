@@ -1,5 +1,6 @@
 angular.module('ionicApp', ['ionic'] )
 
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -77,25 +78,28 @@ angular.module('ionicApp', ['ionic'] )
       controller: 'MenuCtrl'
     })
      .state('details', {
-      url: "/details",
+      url: "/details/:id",
       templateUrl: "details.html",
-      controller: 'MenuCtrl'
+      controller: 'MenuCtrl', 
     });
 
   $urlRouterProvider.otherwise("/sign-in");   
 
 })
 
-.controller('SignInCtrl', function($scope, $state) {
-  $scope.user = {};
+
+.controller('SignInCtrl', function($scope, $state, SessionService) {
+  
   $scope.signIn = function(user) {
-    
     if (user.username && user.password){
       console.log('Sign-In', user);
-      $scope.user = user;
+      //Save user in session
+      SessionService.setuser(user);
       $state.go('actions');
     }
   };
+
+
 
 })
 
@@ -103,31 +107,41 @@ angular.module('ionicApp', ['ionic'] )
   console.log('HomeTabCtrl');
 })
 
-.controller('ScannerCtrl', function($scope, $state) {
+.controller('ScannerCtrl', function($scope, $state, SessionService) {
   console.log('ScannerCtrl');
-  
+  $scope.user = SessionService.getuser();
   $scope.scan = function() {
       console.log('Url-scanned');
       $state.go('menu');
   };
 })
 
-.controller('MenuCtrl', function($scope, $state, $http) {
+.controller('MenuCtrl', function($scope, $stateParams, $state, $http, SessionService, MenuService) {
   
   // Instantiate an object to store your scope data in (Best Practices)
-  $scope.data = {};
-
+  $scope.restaurante = null;
+  // Img thumbnail
+  $scope.img = 'img/thumbnail.png';
   console.log('MenuCtrl');
+  
 
   $http.get('http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10')
   .success(function(data, status) {
-    console.log('Success');
-    $scope.data = data;
-    $scope.items = data.platos;
+    console.log('Success getting data');
+    $scope.restaurante = data;
+    MenuService.setplatos($scope.restaurante.platos);
+    if ($stateParams.id){
+      console.log($stateParams.id);
+      $scope.clicked = MenuService.getplato(parseInt($stateParams.id));
+      console.log($scope.clicked);
+    }
   })
   .error(function(data, status) {
     console.log('Error');
+    $scope.error="Error getting data from server";
   });
+
+  
 
   $scope.itemButtons = [
     {
@@ -146,14 +160,34 @@ angular.module('ionicApp', ['ionic'] )
     }
   ];
 
-  $scope.details = function(id) {
-      console.log('Item-clicked', id);
-      $state.go('details');
-  };
 
-  
+})
 
 
+//SessionService
+.service('SessionService', function() {
+    this.setuser = function(user) {
+        this.user = user;
+    };
+    this.getuser = function() {
+        return this.user;
+    };
+})
 
+//MenuService
+.service('MenuService', function() {
+    this.setplatos = function(platos){
+      this.platos = platos;
+    }
+    this.getplato = function(id) {
+        for(var i = 0; i < this.platos.length; i += 1){
+          var result = this.platos[i];
+        if(result.id === id){
+            return result;
+        }
+      }
+    };
 
 });
+
+

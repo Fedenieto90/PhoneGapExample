@@ -68,11 +68,11 @@
   </script>
 
    <script id="main-actions.html" type="text/ng-template">
-    <ion-view title="Actions" hide-back-button="true">
+    <ion-view title="Swaiter" hide-back-button="true">
       <ion-content>
         <div class="card">
           <div class="item item-text-wrap" style="text-align: center;">
-           Bienvenido
+           Bienvenido {{user.username}}
           </div>
         </div>
         <div class="padding">
@@ -87,16 +87,23 @@
    <script id="menu.html" type="text/ng-template">
     <ion-view title="Menu">
     <ion-content>
-      <div class="card">
+      <div data-ng-show="restaurante != null" class="card">
             <div class="item item-text-wrap" style="text-align: center;">
-             <p>{{data.nombre}}</p> 
+             <h2>{{restaurante.nombre}}</h2>
+             <p>{{restaurante.descripcion}}</p>   
+            </div>
+      </div>
+      <div data-ng-show="error != null" class="card">
+            <div class="item item-text-wrap" style="text-align: center;">
+             <p>{{error}}</p>  
             </div>
       </div>
       <ion-list>
-        <ion-item ng-repeat="item in data.platos | orderBy:item.tipo" item="item" ng-click="details({{item.id}})">
-          <p><strong>{{ item.nombre }}</strong></p>
-          <p>{{ item.descripcion }}</p>
-          <p><strong>$ {{item.precio}}</strong></p>
+        <ion-item ng-if="restaurante != null" ng-repeat="item in restaurante.platos | orderBy:item.tipo" item="item" href="#/details/{{item.id}}" class="item item-thumbnail-left">
+          <img ng-src="{{ img }}">
+          <h2>{{ item.nombre }}</h2>
+          <h4>{{ item.descripcion }}</h4>
+          <p>$ {{item.precio}}</p>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -106,19 +113,18 @@
     <ion-view title="Details">
     <ion-content>
       <div class="list card">
-
         <div class="item item-avatar">
           <img src="img/default_avatar.png">
-          <h2>Empanada</h2>
-          <p>Empanada de carne cortada a cuchillo</p>
+            <ion-list>
+              <h2>{{clicked.nombre}}</h2>
+              <h4>{{clicked.precio | currency}}</h4>
+            </ion-list>
         </div>
 
         <div class="item item-body">
           <img class="full-image" src="img/default_img.jpg">
           <p>
-            This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-            the content is from a card-body consisting of an image and paragraph text. The footer
-            consists of tabs, icons aligned left, within the card-footer.
+            <h2>{{clicked.descripcion}}</h2>
           </p>
           <p>
             <a href="#" class="subdued">1 Like</a>
