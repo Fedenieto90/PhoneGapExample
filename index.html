@@ -18,7 +18,7 @@
 
 <body>
 
-  <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+  <ion-nav-bar class="bar-dark nav-title-slide-ios7">
     <ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
   </ion-nav-bar>
 
@@ -38,7 +38,7 @@
           </label>
         </div>
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="signIn(user)">
+          <button class="button button-block button-dark" ng-click="signIn(user)">
             Sign-In
           </button>
           <p class="text-center">
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="scan()">
+          <button class="button button-block button-dark" ng-click="scan()">
             Scan Menu
           </button>
         </div>
@@ -111,10 +111,38 @@
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-assertive">
       <h1 class="title">Items en el pedido: </h1>
-      <div class="buttons" ng-click="doSomething()">
+      <div class="buttons" ng-click="modal.show()">
         <button class="button">Mi pedido</button>
       </div>
     </ion-footer-bar>
+  </script>
+
+  <script id="modal.html" type="text/ng-template">
+    <div class="modal" ng-controller="ModalCtrl">
+      <ion-header-bar class="bar bar-header bar-assertive">
+        <h1 class="title">Mi Pedido</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Esconder</button>
+      </ion-header-bar>
+      <ion-content>
+        <div class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">First Name</span>
+              <input ng-model="newUser.firstName" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Last Name</span>
+              <input ng-model="newUser.lastName" type="text">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Email</span>
+              <input ng-model="newUser.email" type="text">
+            </label>
+            <button class="button button-full button-assertive">Realizar Pedido</button>
+          </div>
+        </div>
+      </ion-content>
+    </div>
   </script>
 
    <script id="details.html" type="text/ng-template">

@@ -111,7 +111,7 @@ angular.module('ionicApp', ['ionic'] )
   };
 })
 
-.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, SessionService, MenuService) {
+.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, $ionicModal, SessionService, MenuService) {
   
   // Set loading bar
   $scope.loading = true;
@@ -136,7 +136,14 @@ angular.module('ionicApp', ['ionic'] )
     $scope.showAlert();
   });
 
-  
+
+  // Modal Pedido
+  $ionicModal.fromTemplateUrl('modal.html', function (modal) {
+    $scope.modal = modal;
+  }, {
+    animation: 'slide-in-up',
+    focusFirstInput: true
+  });
 
   // Alert dialog
   $scope.showAlert = function() {
@@ -147,6 +154,18 @@ angular.module('ionicApp', ['ionic'] )
      alertPopup.then(function(res) {
        $state.go('actions');
      });
+  };
+
+})
+
+
+  .controller('ModalCtrl', function ($scope) {
+
+  $scope.newUser = {};
+
+  $scope.createContact = function () {
+    console.log('Create Contact', $scope.newUser);
+    $scope.modal.hide();
   };
 
 })
