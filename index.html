@@ -18,14 +18,14 @@
 
 <body>
 
-  <ion-nav-bar class="bar-dark nav-title-slide-ios7">
+  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
     <ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
   </ion-nav-bar>
 
   <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
   <script id="sign-in.html" type="text/ng-template">
-    <ion-view title="Sign-In">
+    <ion-view title="Swaiter">
       <ion-content>
         <div class="list">
           <label class="item item-input">
@@ -110,9 +110,9 @@
       </ion-list>
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-assertive">
-      <h1 class="title">Items en el pedido: </h1>
+      <h1 class="title">Pedido</h1>
       <div class="buttons" ng-click="modal.show()">
-        <button class="button">Mi pedido</button>
+        <button class="button"><i class="icon ion-bag"></i></button>
       </div>
     </ion-footer-bar>
   </script>
@@ -122,15 +122,17 @@
       <ion-header-bar class="bar bar-header bar-assertive">
         <h1 class="title">Mi Pedido</h1>
         <button class="button button-clear button-primary" ng-click="modal.hide()">Esconder</button>
+        <button data-ng-show="pedido != ''" class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
       </ion-header-bar>
       <ion-content>
+
       <div data-ng-show="pedido == '' " class="card">
             <div class="item item-text-wrap" style="text-align: center;">
-             <h2>No has agregado ningun plato al pedido aun</h2>  
+             <h2>No has agregado ningun plato al pedido</h2>  
             </div>
       </div>
         <div class="padding">
-          <div class="list">
+          <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
             <ion-item ng-if="pedido != '' " ng-repeat="item in pedido track by $index" item="item" class="item item-thumbnail-left">
             <img ng-src="{{ img }}">
             <h2>{{ item.nombre }}</h2>
@@ -138,7 +140,7 @@
             <p>$ {{item.precio}}</p>
             </ion-item>
             <button class="button button-full button-assertive" data-ng-show="pedido != '' ">Realizar Pedido</button>
-          </div>
+          </ion-list>
         </div>
       </ion-content>
     </div>
@@ -154,8 +156,14 @@
               <h2>{{clicked.nombre}}</h2>
               <h4>{{clicked.precio | currency}}</h4>
             </ion-list>
-        </div>
 
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left" ng-controller="ModalCtrl">
+          <a class="tab-item" ng-click="addPlato(clicked)">
+            <i class="icon ion-plus-circled"></i>
+            Agregar al pedido
+          </a>
+        </div>
         <div class="item item-body">
           <img class="full-image" src="img/thumbnail.png">
           <p>
@@ -167,7 +175,7 @@
           </p>
         </div>
 
-        <div class="item tabs tabs-secondary tabs-icon-left" ng-controller="ModalCtrl">
+        <div class="item tabs tabs-secondary tabs-icon-left">
           <a class="tab-item" href="#">
             <i class="icon ion-thumbsup"></i>
             Like
@@ -176,17 +184,18 @@
             <i class="icon ion-chatbox"></i>
             Comment
           </a>
-          <a class="tab-item" ng-click="addPlato(clicked)">
-            <i class="icon ion-share"></i>
-            Agregar al pedido
-          </a>
         </div>
+      </div>
+       <div class="card">
+            <div class="item item-text-wrap" style="text-align: center;">
+            <p></p>  
+            </div>
       </div>
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-assertive">
-      <h1 class="title">Items en el pedido: {{cantidad}}</h1>
+      <h1 class="title">Pedido</h1>
       <div class="buttons" ng-click="modal.show()">
-        <button class="button">Mi pedido</button>
+        <button class="button"><i class="icon ion-bag"></i></button>
       </div>
     </ion-footer-bar>
   </script>

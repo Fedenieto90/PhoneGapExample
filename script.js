@@ -111,25 +111,6 @@ angular.module('ionicApp', ['ionic'] )
   };
 })
 
-.controller('ModalCtrl', function ($scope, SessionService, PedidoService, MenuService) {
-
-  console.log("ModalCtrl");
-  $scope.newUser = {};
-  $scope.user = SessionService.getuser();
-  $scope.pedido = PedidoService.getplatos();
-  $scope.img = 'img/thumbnail.png';
-
-  $scope.createContact = function () {
-    console.log('Create Contact', $scope.newUser);
-    $scope.modal.hide();
-  };
-
-  $scope.addPlato = function (item) {
-   PedidoService.addplato(item);
-  };
-
-})
-
 
 .controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, $ionicModal, SessionService, MenuService, PedidoService) {
   
@@ -139,7 +120,8 @@ angular.module('ionicApp', ['ionic'] )
   $scope.restaurante = null;
   // Img thumbnail
   $scope.img = 'img/thumbnail.png';
-  
+  // Set cantidad de items en el pedido
+  $scope.cantidad = PedidoService.countplatos();
   
   console.log('MenuCtrl');
   
@@ -158,7 +140,7 @@ angular.module('ionicApp', ['ionic'] )
     $scope.showAlert();
   });
 
-
+  
   // Modal Pedido
   $ionicModal.fromTemplateUrl('modal.html', function (modal) {
     $scope.modal = modal;
@@ -180,6 +162,46 @@ angular.module('ionicApp', ['ionic'] )
 
 })
 
+.controller('ModalCtrl', function ($scope, SessionService, PedidoService, MenuService, $state, $ionicPopup) {
+
+  console.log("ModalCtrl");
+  $scope.user = SessionService.getuser();
+  $scope.pedido = PedidoService.getplatos();
+  $scope.img = 'img/thumbnail.png';
+  $scope.cantidad = PedidoService.countplatos();
+  console.log($scope.cantidad);
+
+  $scope.addPlato = function (item) {
+   PedidoService.addplato(item);
+   $scope.showAlert();
+  };
+
+  $scope.onItemDelete = function (item) {
+    $scope.pedido.splice($scope.pedido.indexOf(item.id), 1);
+    $scope.showAlert2();
+  };
+
+  // Alert dialog
+  $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Agregado al pedido!',
+       template: ''
+     });
+     alertPopup.then(function(res) {
+       $state.go('menu');
+     });
+  };
+
+  // Alert dialog
+  $scope.showAlert2 = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Eliminado del pedido!',
+       template: ''
+     });
+  };
+
+})
+
 
 
 //SessionService
@@ -193,8 +215,9 @@ angular.module('ionicApp', ['ionic'] )
 })
 
 //PedidoService
-.service('PedidoService', function(MenuService) {
+.service('PedidoService', function() {
     this.pedido = [];
+
     this.addplato = function(item) {
         this.pedido.push(item);
     };
@@ -203,7 +226,6 @@ angular.module('ionicApp', ['ionic'] )
     };
     this.countplatos = function(){
         return this.pedido.length;
-        console.log(this.pedido.length);
     };
 })
 
