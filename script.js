@@ -136,7 +136,7 @@ angular.module('ionicApp', ['ionic'] )
   };
   $scope.cerrarSesion = function() {
       console.log('Sesión Terminada');
-      $state.go('intro');
+      $state.go('signin');
   };
 })
 
