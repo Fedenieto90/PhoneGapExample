@@ -104,7 +104,9 @@ angular.module('ionicApp', ['ionic'] )
   
   console.log('ScannerCtrl');
   $scope.user = SessionService.getuser();
-  
+  if (!($scope.user)){
+   $state.go('signin');
+  }
   $scope.scan = function() {
       console.log('Url-scanned');
       $state.go('menu');
@@ -112,35 +114,66 @@ angular.module('ionicApp', ['ionic'] )
 })
 
 
-.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, $ionicModal, SessionService, MenuService, PedidoService) {
+.controller('MenuCtrl', function($scope, $stateParams, $state, $http, $ionicPopup, $ionicModal, $timeout, SessionService, MenuService, PedidoService) {
   
-  // Set loading bar
-  $scope.loading = true;
   // Instantiate an object to store your scope data in (Best Practices)
-  $scope.restaurante = null;
-  // Img thumbnail
-  $scope.img = 'img/thumbnail.png';
-  // Set cantidad de items en el pedido
-  $scope.cantidad = PedidoService.countplatos();
+  $scope.balneario = {
+    nombre: 'Balneario',
+    descripcion: 'Descripcion'
+  };
   
-  console.log('MenuCtrl');
-  
-  $http.get('http://192.168.1.33:8080/com.smartwaiter/rest/webservice/getplatosalternativa/1/10')
-  .success(function(data, status) {
-    $scope.restaurante = data;
-    MenuService.setplatos($scope.restaurante.platos);
-    if ($stateParams.id){
-      $scope.clicked = MenuService.getplato(parseInt($stateParams.id));
+ 
+  // Instantiate an object to store your scope data in (Best Practices)
+  $scope.restaurante = {
+    nombre: 'Restaurante',
+    descripcion: 'Descripcion',
+    platos: [
+      {
+      id: 1,
+      nombre: 'Plato',
+      descripcion: 'Descripción',
+      precio: 10,
+      img: 'img/thumbnail.png'
+    },
+    {
+      id: 2,
+      nombre: 'Plato',
+      descripcion: 'Descripción',
+      precio: 10,
+      img: 'img/thumbnail.png'
+    },
+    {
+      id: 3,
+      nombre: 'Plato',
+      descripcion: 'Descripción',
+      precio: 10,
+      img: 'img/thumbnail.png'
+    },
+    {
+      id: 4,
+      nombre: 'Plato',
+      descripcion: 'Descripción',
+      precio: 10,
+      img: 'img/thumbnail.png'
+    },
+    {
+      id: 5,
+      nombre: 'Plato',
+      descripcion: 'Descripción',
+      precio: 10,
+      img: 'img/thumbnail.png'
     }
-    $scope.loading = false;
-  })
-  .error(function(data, status) {
-    $scope.error="Error getting data from server";
-    $scope.loading = false;
-    $scope.showAlert();
-  });
+    ]
+  };
 
   
+  if ($stateParams.id){
+    $scope.clicked = MenuService.getplato(parseInt($stateParams.id));
+  }
+
+  
+  MenuService.setplatos($scope.restaurante.platos);
+
   // Modal Pedido
   $ionicModal.fromTemplateUrl('modal.html', function (modal) {
     $scope.modal = modal;
@@ -158,6 +191,28 @@ angular.module('ionicApp', ['ionic'] )
      alertPopup.then(function(res) {
        $state.go('actions');
      });
+  };
+
+ //Swipe to refresh
+ $scope.doRefresh = function() {
+      
+      console.log('Refreshing!');
+      $timeout( function() {
+      var plato= {
+        id: Math.floor(Math.random() * 1000) + 4,
+        nombre: 'Nuevo Plato',
+        descripcion: 'Descripcion',
+        precio: 10,
+        img: 'img/thumbnail.png'
+      };  
+      $scope.restaurante.platos.push(plato);
+      
+
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
+      
+      }, 1000);
+      
   };
 
 })
@@ -202,8 +257,6 @@ angular.module('ionicApp', ['ionic'] )
 
 })
 
-
-
 //SessionService
 .service('SessionService', function() {
     this.setuser = function(user) {
@@ -243,6 +296,12 @@ angular.module('ionicApp', ['ionic'] )
         }
       }
     };
+    this.hayplatos = function(){
+      if (this.platos)
+        return true;
+      else
+        return false;
+    }
 
 });
 

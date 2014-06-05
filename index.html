@@ -18,7 +18,7 @@
 
 <body>
 
-  <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+  <ion-nav-bar class="bar-positive nav-title-slide-ios7">
     <ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
   </ion-nav-bar>
 
@@ -38,12 +38,9 @@
           </label>
         </div>
         <div class="padding">
-          <button class="button button-block button-dark" ng-click="signIn(user)">
-            Sign-In
+          <button class="button button-block button-stable" ng-click="signIn(user)">
+            Iniciar Sesión
           </button>
-          <p class="text-center">
-            <a href="#/forgot-password">Forgot password</a>
-          </p>
         </div>
       </ion-content>
     </ion-view>
@@ -72,12 +69,12 @@
       <ion-content>
         <div class="card">
           <div class="item item-text-wrap" style="text-align: center;">
-           <h2>Bienvenido {{user.username}}</h2>
+           <h2>{{user.username}}</h2>
           </div>
         </div>
         <div class="padding">
-          <button class="button button-block button-dark" ng-click="scan()">
-            Scan Menu
+          <button class="button button-block button-stable" ng-click="scan()">
+            Ver Menú
           </button>
         </div>
       </ion-content>
@@ -85,9 +82,7 @@
   </script>
 
    <script id="menu.html" type="text/ng-template">
-    <ion-view title="{{restaurante.nombre}}">
-    
-    <div class="bar bar-loading bar-assertive" data-ng-show="loading">Loading Menu...</div>
+    <ion-view title="{{balneario.nombre}}">
     <ion-content>
       <div data-ng-show="restaurante != null" class="card">
             <div class="item item-text-wrap" style="text-align: center;">
@@ -100,9 +95,11 @@
              <p>{{error}}</p>  
             </div>
       </div>
+      <ion-refresher on-refresh="doRefresh()"   refreshing-icon="ion-refreshing">
+    </ion-refresher>
       <ion-list>
-        <ion-item ng-if="restaurante != null" ng-repeat="item in restaurante.platos | orderBy:item.tipo" item="item" href="#/details/{{item.id}}" class="item item-thumbnail-left">
-          <img ng-src="{{ img }}">
+        <ion-item ng-if="restaurante != null" ng-repeat="item in restaurante.platos" item="item" href="#/details/{{item.id}}" class="item item-thumbnail-left">
+          <img ng-src="{{ item.img }}">
           <h2>{{ item.nombre }}</h2>
           <h4>{{ item.descripcion }}</h4>
           <p>$ {{item.precio}}</p>
@@ -134,7 +131,7 @@
         <div class="padding">
           <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
             <ion-item ng-if="pedido != '' " ng-repeat="item in pedido track by $index" item="item" class="item item-thumbnail-left">
-            <img ng-src="{{ img }}">
+            <img ng-src="{{ item.img }}">
             <h2>{{ item.nombre }}</h2>
             <h4>{{ item.descripcion }}</h4>
             <p>$ {{item.precio}}</p>
@@ -151,7 +148,7 @@
     <ion-content>
       <div class="list card">
         <div class="item item-avatar">
-           <img src="img/thumbnail.png"></img>
+           <img src="{{clicked.img}}"></img>
             <ion-list>
               <h2>{{clicked.nombre}}</h2>
               <h4>{{clicked.precio | currency}}</h4>
