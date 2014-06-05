@@ -24,8 +24,68 @@
 
   <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
+  <script id="intro.html" type="text/ng-template">
+    <ion-view title="Swaiter" hide-back-button="true">
+
+      <ion-nav-buttons side="left">
+        <button class="button button-clear no-animation"
+                ng-click="startApp()" ng-if="!slideIndex">
+          Skip Intro
+        </button>
+        <button class="button button-clear no-animation"
+                ng-click="previous()" ng-if="slideIndex > 0">
+          Previous Slide
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button button-clear no-animation"
+                ng-click="next()" ng-if="slideIndex != 2">
+          Next
+        </button>
+        <button class="button button-clear no-animation"
+                ng-click="startApp()" ng-if="slideIndex == 2">
+          Start
+        </button>
+      </ion-nav-buttons>
+
+      <ion-slide-box on-slide-changed="slideChanged(index)">
+        <ion-slide>
+          <h3></h3>
+          <div id="logo">
+            <img src="img/swaiter.png">
+          </div>
+          <p>
+            Bienvenido a Swaiter
+          </p>
+          <p>
+            But if you are angry, too bad.
+          </p>
+        </ion-slide>
+        <ion-slide>
+          <h3>Pedí en solo tres pasos!</h3>
+
+          <div id="list">
+            <h5></h5>
+            <ol>
+              <li>Explorá el menu</li>
+              <li>Elegí tus platos</li>
+              <li>Hacé tu pedido</li>
+            </ol>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <h3>Empezá ya!</h3>
+          <div id="logo">
+            <img src="img/swaiter.png">
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+
+    </ion-view>
+  </script>
+
   <script id="sign-in.html" type="text/ng-template">
-    <ion-view title="Swaiter">
+    <ion-view title="Swaiter" hide-back-button="true">
       <ion-content>
         <div class="list">
           <label class="item item-input">
@@ -66,6 +126,12 @@
 
    <script id="main-actions.html" type="text/ng-template">
     <ion-view title="Swaiter" hide-back-button="true">
+      <ion-nav-buttons side="right">
+        <button class="button button-clear no-animation"
+                ng-click="cerrarSesion()">
+          Cerrar Sesión
+        </button>
+      </ion-nav-buttons>  
       <ion-content>
         <div class="card">
           <div class="item item-text-wrap" style="text-align: center;">
@@ -118,8 +184,8 @@
     <div class="modal" ng-controller="ModalCtrl">
       <ion-header-bar class="bar bar-header bar-assertive">
         <h1 class="title">Mi Pedido</h1>
-        <button class="button button-clear button-primary" ng-click="modal.hide()">Esconder</button>
         <button data-ng-show="pedido != ''" class="button button-icon icon ion-ios7-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Esconder</button>
       </ion-header-bar>
       <ion-content>
 

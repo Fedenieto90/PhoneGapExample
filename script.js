@@ -4,6 +4,11 @@ angular.module('ionicApp', ['ionic'] )
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
+  .state('intro', {
+      url: "/intro",
+      templateUrl: "intro.html",
+      controller: 'IntroCtrl'
+    })
     .state('signin', {
       url: "/sign-in",
       templateUrl: "sign-in.html",
@@ -83,10 +88,28 @@ angular.module('ionicApp', ['ionic'] )
       controller: 'MenuCtrl', 
     });
 
-  $urlRouterProvider.otherwise("/sign-in");   
+  $urlRouterProvider.otherwise("/intro");   
 
 })
 
+.controller('IntroCtrl', function ($scope, $state, $ionicSlideBoxDelegate) {
+
+  // Called to navigate to the main app
+  $scope.startApp = function () {
+    $state.go('signin');
+  };
+  $scope.next = function () {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function () {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  // Called each time the slide changes
+  $scope.slideChanged = function (index) {
+    $scope.slideIndex = index;
+  };
+})
 
 .controller('SignInCtrl', function($scope, $state, SessionService) {
   
@@ -110,6 +133,10 @@ angular.module('ionicApp', ['ionic'] )
   $scope.scan = function() {
       console.log('Url-scanned');
       $state.go('menu');
+  };
+  $scope.cerrarSesion = function() {
+      console.log('Sesión Terminada');
+      $state.go('intro');
   };
 })
 
