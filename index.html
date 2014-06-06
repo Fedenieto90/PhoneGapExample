@@ -12,7 +12,15 @@
 
   <script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    function onDeviceReady() {
+          document.addEventListener("backbutton", onBackKeyDown, false);
+      }
 
+    function onBackKeyDown() {
+        navigator.app.exitApp();
+    }
+  </script>
   
 </head>
 
@@ -152,8 +160,8 @@
         </ion-item>
       </ion-list>
     </ion-content>
-    <ion-footer-bar align-title="left" class="bar-assertive">
-      <h1 class="title">Pedido</h1>
+    <ion-footer-bar align-title="center" class="bar-assertive">
+      <h1 class="title" >Mi Pedido</h1>
       <div class="buttons" ng-click="modal.show()">
         <button class="button"><i class="icon ion-bag"></i></button>
       </div>
