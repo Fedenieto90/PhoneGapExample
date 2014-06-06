@@ -12,15 +12,6 @@
 
   <script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.min.js"></script>
   <script src="script.js"></script>
-  <script>
-    function onDeviceReady() {
-          document.addEventListener("backbutton", onBackKeyDown, false);
-      }
-
-    function onBackKeyDown() {
-        navigator.app.exitApp();
-    }
-  </script>
   
 </head>
 
@@ -75,20 +66,22 @@
   <script id="sign-in.html" type="text/ng-template">
     <ion-view title="Swaiter" hide-back-button="true">
       <ion-content>
-        <div class="list">
-          <label class="item item-input">
-            <span class="input-label">Username</span>
-            <input type="text" ng-model="user.username">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Password</span>
-            <input type="password" ng-model="user.password">
-          </label>
-        </div>
         <div class="padding">
-          <button class="button button-block button-positive" ng-click="signIn(user)">
-            Iniciar Sesión
-          </button>
+          <div class="list">
+            <label class="item item-input big">
+              <span class="input-label">Username</span>
+              <input type="text" ng-model="user.username">
+            </label>
+            <label class="item item-input big">
+              <span class="input-label">Password</span>
+              <input type="password" ng-model="user.password">
+            </label>
+          </div>
+          <div class="padding">
+            <button class="button button-block button-positive" ng-click="signIn(user)">
+              Iniciar Sesión
+            </button>
+          </div>
         </div>
       </ion-content>
     </ion-view>
